@@ -49,15 +49,6 @@
 					<form:errors path="email" style="color: red"/>
 				</div>
 
-				<div class="form-group">
-					<label>Pets</label>
-					<c:if test="${not empty owner.pets }">
-						<c:forEach varStatus="tempPet" items="${owner.pets}" >
-								<form:hidden path="pets[${tempPet.index }]"/>
-						</c:forEach>
-					</c:if>
-				</div>
-
 				<input type="submit" value="Submit">
 			</form:form>
 		</div>

@@ -35,16 +35,15 @@
 
 			<tbody>
 				<c:if test="${not empty pets }">
+					<!-- loop over all the pets -->
 					<c:forEach var="tempPet" items="${pets }">
 					
+					<!-- link to show update form -->
 					<c:url var="updateLink" value="/pets/showUpdateForm">
 						<c:param name="petId" value="${tempPet.id}"></c:param>
 					</c:url>
 					
-					<c:url var="adoptLink" value="/pets/adopt">
-						<c:param name="petId" value="${tempPet.id}"></c:param>
-					</c:url>
-
+					<!-- link to delete pet -->
 					<c:url var="deleteLink" value="/pets/delete">
 						<c:param name="petId" value="${tempPet.id}"></c:param>
 					</c:url>
@@ -63,11 +62,6 @@
 									<a href="${updateLink}">Update</a>
 									 
 									| 
-									
-									<!-- adopt pet -->
-									<a href="${adoptLink }"
-										onClick="if (!(confirm('Are you sure you this pet is adopted ?'))) return false;">Adopt</a>
-									|
 									
 									<!-- delete pet --> 
 									<a href="${deleteLink}"

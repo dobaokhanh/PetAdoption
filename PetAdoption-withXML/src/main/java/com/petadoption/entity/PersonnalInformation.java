@@ -10,7 +10,7 @@ import javax.validation.constraints.Size;
 public class PersonnalInformation {
 
 	@NotNull(message = "is required")
-	@Size(min = 3, message = "is required")
+	@Size(min = 1, message = "is required")
 	@Column(name = "name")
 	private String name;
 

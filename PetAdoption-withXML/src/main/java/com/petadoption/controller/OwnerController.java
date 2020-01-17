@@ -24,7 +24,7 @@ import com.petadoption.service.OwnerService;
 @RequestMapping("/owners")
 public class OwnerController {
 	
-	/** Add an initbinder to conver trim input strings
+	/** Add an initbinder to convert trim input strings
 	 *  remove leading and trailing whitespace 
 	 * @param databinder
 	 */
@@ -85,7 +85,6 @@ public class OwnerController {
 		
 		// add the owner to the model
 		theModel.addAttribute("owner", owner);
-
 		return "/forms/add-new-owner";
 	}
 
@@ -101,10 +100,8 @@ public class OwnerController {
 		if (bindingResult.hasErrors()) {
 			return "forms/add-new-owner";
 		}
-		
 		// save the owner
 		ownerService.saveOwner(theOwner);
-		System.out.println(theOwner.toString());
 		return "redirect:/owners/";
 	}
 

@@ -43,6 +43,15 @@
 					<form:textarea path="describe" class="form-control" placeholder="Describe"/>
 					<form:errors path="describe" style="color: red"/>
 				</div>
+				
+				<div class="form-group">
+					<label>Adopted</label>
+					<form:select path="adopted">
+						<form:option value="false">No</form:option>
+						<form:option value="true">Yes</form:option>
+					</form:select>
+				</div>
+				
 				<input type="submit" value="Submit">
 			</form:form>
 		</div>

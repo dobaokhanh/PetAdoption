@@ -26,7 +26,7 @@ import com.petadoption.service.FosterService;
 @RequestMapping("/fosters")
 public class FosterController {
 
-	/** Add an initbinder to conver trim input strings
+	/** Add an init binder to convert trim input strings
 	 *  remove leading and trailing whitespace 
 	 * @param databinder
 	 */
@@ -114,7 +114,7 @@ public class FosterController {
 		
 		// delete the foster by Id
 		fosterService.deleteFoster(theId);
-		
+
 		return "redirect:/fosters/";
 	}
 }

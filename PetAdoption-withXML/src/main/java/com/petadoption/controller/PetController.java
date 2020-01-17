@@ -26,23 +26,25 @@ import com.petadoption.service.PetService;
 @RequestMapping("/pets")
 public class PetController {
 
-	/** Add an initbinder to conver trim input strings
-	 *  remove leading and trailing whitespace 
+	/**
+	 * Add an initbinder to convert trim input strings remove leading and trailing
+	 * whitespace
+	 * 
 	 * @param databinder
 	 */
 	@InitBinder
 	public void initBinder(WebDataBinder databinder) {
-		
+
 		StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);
 		databinder.registerCustomEditor(String.class, stringTrimmerEditor);
 	}
-	
+
 	@Autowired
 	private PetService petService;
 
 	@Value("#{breedOptions}")
 	private Map<String, String> breedOptions;
-	
+
 	/**
 	 * List all the pets
 	 * 
@@ -54,7 +56,7 @@ public class PetController {
 
 		// get the list of pets in the dao
 		List<Pet> pets = petService.getPets();
-				
+
 		// add list of pets to the model
 		theModel.addAttribute("pets", pets);
 
@@ -72,16 +74,16 @@ public class PetController {
 
 		// add Pet to the model
 		theModel.addAttribute("pet", new Pet());
-		
+
 		// add breed options to the model
 		theModel.addAttribute("breedOptions", breedOptions);
 
 		return "/forms/add-new-pet-form";
 	}
-	
+
 	@GetMapping("/showUpdateForm")
 	private String showUpdateForm(@RequestParam("petId") int theId, Model theModel) {
-		
+
 		// retrieve pet from database
 		Pet pet = petService.getPet(theId);
 		
@@ -90,7 +92,7 @@ public class PetController {
 		
 		// add the breed options to the model
 		theModel.addAttribute("breedOptions", breedOptions);
-		
+
 		return "/forms/add-new-pet-form";
 	}
 
@@ -101,34 +103,16 @@ public class PetController {
 	 * @return the page list all the pets
 	 */
 	@PostMapping("/addNewPet")
-	public String addNewPet(@Valid @ModelAttribute("pet") Pet thePet, BindingResult bindingResult, Model theModel) {
-		
+	public String addNewPet(@Valid @ModelAttribute("pet") Pet thePet,
+			BindingResult bindingResult, Model theModel) {
+
 		if (bindingResult.hasErrors()) {
+			theModel.addAttribute("pet", thePet);
 			theModel.addAttribute("breedOptions", breedOptions);
 			return "/forms/add-new-pet-form";
 		}
-		
 		// add new pet to the database
 		petService.savePet(thePet);
-		return "redirect:/pets/";
-	}
-	
-	/** Adopt pet
-	 * @param theId
-	 * @return the list of updated pets
-	 */
-	@GetMapping("/adopt")
-	public String adoptPet(@RequestParam("petId") int theId) {
-		
-		// retrieve pet by id from database
-		Pet pet = petService.getPet(theId);
-		
-		// set adopted to true
-		pet.setAdopted(true);
-		System.out.println(pet.getBreed());
-		// update pet
-		petService.savePet(pet);
-		// return to list of pets
 		return "redirect:/pets/";
 	}
 

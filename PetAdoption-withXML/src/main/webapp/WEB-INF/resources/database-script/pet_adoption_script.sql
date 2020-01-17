@@ -37,7 +37,7 @@ CREATE TABLE `pet` (
   `name` varchar(45) DEFAULT NULL,
   `age` double DEFAULT NULL,
   `breed` varchar(45) DEFAULT NULL,
-  `describe` varchar(255) DEFAULT NULL,
+  `short_describe` varchar(255) DEFAULT NULL,
   `adopted` boolean DEFAULT false,
   `owner_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),

@@ -20,7 +20,7 @@ public class Pet {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private int id;
+	private Integer id;
 	
 	@NotNull(message = "is required")
 	@Column(name = "name")
@@ -37,15 +37,14 @@ public class Pet {
 	private String breed;
 
 	@NotNull(message = "is required")
-	@Column(name = "describe")
+	@Column(name = "short_describe")
 	private String describe;
 
 	@NotNull(message = "is required")
 	@Column(name = "adopted")
 	private boolean adopted;
 
-	@ManyToOne(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
-			CascadeType.REFRESH })
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "owner_id")
 	private Owner owner;
 	
@@ -57,7 +56,7 @@ public class Pet {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -109,10 +108,15 @@ public class Pet {
 		this.owner = owner;
 	}
 
+	public boolean isNew() {
+		return this.id == null;
+	}
+
 	@Override
 	public String toString() {
 		return "Pet [id=" + id + ", name=" + name + ", age=" + age + ", breed=" + breed + ", describe=" + describe
-				+ ", adopted=" + adopted + "]";
+				+ ", adopted=" + adopted + ", owner=" + owner + "]";
 	}
+
 
 }
